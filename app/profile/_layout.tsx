@@ -3,12 +3,10 @@ import React from "react";
 
 function ProfileLayout() {
   return (
-    <Tabs>
-      <Tabs.Screen
-        name="index"
-        options={{ headerShown: false, tabBarLabel: "profile" }}
-      />
-      <Tabs.Screen name="likes" options={{ headerShown: false }} />
+    <Tabs screenOptions={{ headerShown: false }}>
+      <Tabs.Screen name="index" />
+      <Tabs.Screen name="likes" />
+      <Tabs.Screen name="[id]" options={{ tabBarLabel: "Random Profile" }} />
     </Tabs>
   );
 }
