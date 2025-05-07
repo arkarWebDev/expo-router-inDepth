@@ -1,9 +1,17 @@
 import { Link, useRouter } from "expo-router";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+} from "react-native";
 
 function index() {
   const router = useRouter();
+  const theme = useColorScheme();
+  const isDarkMode = theme === "dark";
 
   const randomProfileImage = () => {
     const randomNumber = Math.floor(Math.random() * 1000);
@@ -20,10 +28,22 @@ function index() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Hello World!!</Text>
-      <Link href={"/settings"}>Go to settings</Link>
-      <Link href={"./profile"}>Go to profile</Link>
+    <View style={[styles.container, isDarkMode && styles.darkContainer]}>
+      <Text style={[{ fontSize: 16 }, isDarkMode && { color: "#BB86FC" }]}>
+        Hello World!!
+      </Text>
+      <Link
+        href={"/settings"}
+        style={[styles.button, isDarkMode && styles.darkButton]}
+      >
+        Go to settings
+      </Link>
+      <Link
+        href={"./profile"}
+        style={[styles.button, isDarkMode && styles.darkButton]}
+      >
+        Go to profile
+      </Link>
       {/* <Link
         href={{
           pathname: "./profile/[id]",
@@ -35,7 +55,9 @@ function index() {
         Go to randomProfile
       </Link> */}
       <Pressable onPress={goToRandomProfile}>
-        <Text>Go to random profile</Text>
+        <Text style={[styles.button, isDarkMode && styles.darkButton]}>
+          Go to random profile
+        </Text>
       </Pressable>
     </View>
   );
@@ -48,5 +70,22 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    gap: 20,
+    flexDirection: "column",
+  },
+  button: {
+    color: "white",
+    backgroundColor: "black",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    fontSize: 16,
+  },
+  darkContainer: {
+    backgroundColor: "#121212",
+  },
+  darkButton: {
+    color: "#BB86FC",
+    backgroundColor: "#1E1E1E",
   },
 });
